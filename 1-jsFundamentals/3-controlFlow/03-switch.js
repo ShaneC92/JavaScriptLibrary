@@ -19,7 +19,7 @@ switch (officeCharacter) {
     Challenge
 */
 
-let dessert = "Donut"
+let dessert = "cake"
 
 switch (dessert) {
     case "pie":
