@@ -1,0 +1,17 @@
+#main {
+    border: 2px solid black;
+    background-color: lightskyblue;
+    margin: auto;
+}
+
+#movies {
+    text-align: center;
+}
+
+th, td {
+    border: 1px solid blue;
+}
+
+th {
+    height: 50px;
+}
