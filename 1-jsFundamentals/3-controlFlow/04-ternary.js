@@ -17,3 +17,5 @@ if (num == 0) {
 } else {
     console.log("goodbye");
 }
+
+//up to the developer
