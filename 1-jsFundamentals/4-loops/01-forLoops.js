@@ -36,6 +36,7 @@ for (let i = 0; i < name.length; i++) {
 }
 
 //Challenge: make a for lopp where you add up all the numbers from 1 to 50 (should be equal to 1275)
+
 let sum = 0;
 
 for (let i = 1; i <=50; i++) {
