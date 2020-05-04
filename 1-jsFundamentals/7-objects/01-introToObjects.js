@@ -120,10 +120,11 @@ console.log(zucchini);
 let baking = {};
 //bunch of code here
 
-baking.zucchini = "Better make some break!";
+baking.zucchini = "Better make some bread!";
 console.log(baking);
 
 baking["flour"] = "Batter up!";
 console.log(baking);
 
 console.log(baking[garden["vegetable"]]);
+//garden["vegetable"] = zucchini = "Better make some bread"
