@@ -1,58 +1,152 @@
-var express = require('express'); //1
-var router = express.Router(); //2
+var express = require('express'); 
+var router = express.Router(); 
+var sequelize = require('../db');
+var TestModel = sequelize.import('../models/test');
 
-//3    //4 //5            //6
-router.get('/', function (req, res) {
-     //7
-    res.send("Hey!!! This is a test route!");
-});
-//8
-module.exports = router;
 
-/*
-1: We import the Express framework and it inside the variable express. This instance becomes our gateway to using Express methods.
-
-2: We create a new variable called router. Since the express variable(line 1) gives us access into the express framework, we can access express properties and methods by calling express + .. Therefore, when we call express.Router(), we are using the express variable to access the Router() method.
-The Router() method will return a router object for us. You can read about it more at the Express docs (Links to an external site.).
-
-3: We use the router object by using the router variable to get access into the Router() object methods.
-
-4: get() is one of the methods in the object, and we call it here. This method allows us to complete an HTTP GET request. We pass two arguments into the .get method.
-
-5: The first argument is the path. In this case, the path is just a /. More on this later.
-
-6: The second argument is a callback function. This is also sometimes called a “handler function”. This function gets called when the application receives a request to the specified route and HTTP method. The application “listens” for requests that match the specified route(s) and method(s), and when it detects a match, it calls the specified callback function.
-
-7: Inside our callback function, we call res.send(). send() is an express method that can be called on the res or response object. Our response parameter is just a simple string.
-
-8:We export the module for usage outside of the file.
-*/
-
-//Adding /test/about section
-router.get('/about', function (req, res) {
-    res.send("This is an about route");
+router.post('/one', function(req, res) {
+    res.send('Test 1 went through!')
 });
 
-module.exports = router;
 
-//Passing in an object
-router.get('/contact', function(req, res) {
-    res.send({user: "Kenn", email: "kenn@beastmode.come"});
+router.post('/two', function(req, res) {
+    let testData = "Test data for endpoint two";
+
+    TestModel
+        .create({
+            testdata: testData
+        }).then(dataFromDatabase => {
+            res.send("Test two went through!")
+        })
 });
 
-//Pass in an Array
-router.get('/projects', function(req, res){
-    res.send(['Project 1', 'Project 2']);
+router.post('/three', function(req, res) {
+    var testData = req.body.testdata.item;
+
+    TestModel
+        .create({
+            testdata: testData
+        })
+    res.send("Test three went through!")
+    console.log("Test three went through")
 });
 
-//Pass in an Array of Objects
-router.get('/mycontacts', function(req, res) {
-    res.send([
-        {user: "quincy", email: "kenn@beastmode.com"},
-        {user: "aaron", email: "aaron@beastmode.com"},
-        {user: "quincy", email: "quincy@beastmode.com"},
-        {user: "tom", email: "tom@beastmode.com"}
-    ]);
+router.post('/four', function(req, res){
+    var testData = req.body.testdata.item;
+
+    TestModel
+        .create({
+            testdata: testData
+        })
+        .then(
+            function message() {
+                res.send("Test 4 went through!");
+            }
+        );
 });
+
+router.post('/five', function(req, res){
+    var testData = req.body.testdata.item;
+
+    TestModel 
+        .create({
+            testdata: testData
+        })
+        .then(
+            function message(data) {
+                res.send(data);
+            }
+        );
+});
+
+router.post('/six', function(req, res){
+    var testData = req.body.testdata.item;
+
+    TestModel
+        .create({
+            testdata: testData
+        })
+        .then(
+            function message(testdata) {
+                res.json({
+                    testdata: testdata
+                })
+            }
+        );
+});
+
+router.post('/seven', function(req, res) {
+    var testData = req.body.testdata.item;
+
+    TestModel
+        .create({
+            testdata: testData
+        })
+        .then(
+            function createSucess(testdata){
+                res.json({
+                    testdata: testdata
+                });
+            },
+            function createError(err){
+                res.send(500, err.message);
+            }
+        );
+});
+
+router.get('/helloclient', function(req, res){
+    res.send('This is a message from the server to the client.')
+})
+
+
+router.get('/one', function(req, res){
+    TestModel
+        .findAll({
+            attributes: ['id', 'testdata']
+        })
+        .then(
+            function findAllSuccess(data) {
+                console.log('Controller data:', data);
+                res.json(data);
+            },
+            function findAllError(err) {
+                res.send(500, err.message);
+            }
+        );
+});
+
+// router.get('/', function (req, res) {
+     
+//     res.send("Hey!!! This is a test route!");
+// });
+
+// module.exports = router;
+
+// //Adding /test/about section
+// router.get('/about', function (req, res) {
+//     res.send("This is an about route");
+// });
+
+// module.exports = router;
+
+// //Passing in an object
+// router.get('/contact', function(req, res) {
+//     res.send({user: "Kenn", email: "kenn@beastmode.come"});
+// });
+
+// //Pass in an Array
+// router.get('/projects', function(req, res){
+//     res.send(['Project 1', 'Project 2']);
+// });
+
+// //Pass in an Array of Objects
+// router.get('/mycontacts', function(req, res) {
+//     res.send([
+//         {user: "quincy", email: "kenn@beastmode.com"},
+//         {user: "aaron", email: "aaron@beastmode.com"},
+//         {user: "quincy", email: "quincy@beastmode.com"},
+//         {user: "tom", email: "tom@beastmode.com"}
+//     ]);
+// });
 
 module.exports = router;
