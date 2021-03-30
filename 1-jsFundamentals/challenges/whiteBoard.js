@@ -7,29 +7,36 @@
  
  
 function fizzBuzz() {
-	for (i = 0; i <= 100; i++) 
-	console.log(i);
-	if (i % 3 == 0 && i % 5 == 0); {
-		console.log(i) + “Fizz Buzz”;
-	} else if (i % 5 == 0){
-	console.log(i) + “Buzz”;
-	} else (i % 3 == 0) {
-	console.log(i) + “Fizz”;
-	}
-}
-
-function fizzBuzz() {
-    for (i = 0; i <= 100; i++)
-    console.log(i);
-    if (i % 3 == 0 && i % 5 == 0); {
-        console.log(i) + "Fizz Buzz";
-    } else if (i % 5 == 0) {
-        console.log(i) + "Buzz";
-    } else (i % 3 == 0) {
-        console.log(i) + "Fizz";
+    for (i = 0; i <= 100; i++) {
+        if (i % 3 == 0 && i % 5 == 0) {
+            console.log(i + 'Fizz Buzz');
+        } else if (i % 5 == 0){
+        console.log(i + 'Buzz');
+        } else if (i % 3 == 0) {
+        console.log(i + 'Fizz');
+        }
     }
 }
-fizzBuzz(15);
+
+fizzBuzz();
+
+function fizz() {
+	for (I = 0; I <=100; I++) {
+
+        if (I % 5 === 0) {
+            console.log('Buzz');
+        } else if (I % 3 === 0) {
+            console.log('Fizz');
+        } else if (I % 3 ===0 && I % 5 ===0) {
+            console.log('FizzBuzz');
+        } else {
+            console.log(I);
+        }
+    }
+
+}
+
+fizz();
 
 // Challenge 3:-----
  
